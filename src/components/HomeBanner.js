@@ -3,11 +3,12 @@
 import { FlatList, StyleSheet, View } from 'react-native';
 import React, { useCallback } from 'react';
 import { responsiveHeight } from 'react-native-responsive-dimensions';
-import useUpcomingMoviesApi from '../hooks/useUpcomingMoviesApi';
 import MovieBanner from './MovieBanner';
+import useMoviesApi from '../hooks/useMoviesApi';
+import { getUpcomingMovies } from '../api/Network';
 
 const HomeBanner = () => {
-  const [upcomingMovies] = useUpcomingMoviesApi();
+  const [upcomingMovies] = useMoviesApi(getUpcomingMovies);
 
   const renderMovieBanner = useCallback(({ item }) => {
     return <MovieBanner movie={item} />;

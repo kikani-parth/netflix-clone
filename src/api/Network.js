@@ -38,7 +38,7 @@ export const getNowPlayingMovies = async () => {
 
 export const getPopularMovies = async () => {
   try {
-    const response = await axios.get('/movie/popular');
+    const response = await tmdb.get('/movie/popular');
 
     const { data, status } = response;
 
@@ -51,7 +51,7 @@ export const getPopularMovies = async () => {
 
 export const getTopRatedMovies = async () => {
   try {
-    const response = await axios.get('/movie/top_rated');
+    const response = await tmdb.get('/movie/top_rated');
 
     const { data, status } = response;
 
