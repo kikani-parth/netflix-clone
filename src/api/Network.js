@@ -1,20 +1,18 @@
 // Network.js
 
 import axios from 'axios';
+import { TMDB_API_TOKEN } from '@env';
 
-const instance = axios.create({
-  baseURL: 'https://api.themoviedb.org/3/movie',
+const tmdb = axios.create({
+  baseURL: 'https://api.themoviedb.org/3',
   headers: {
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWI4YjczNmQ3NjdkNWE2MzExZTM4Yzk1ZmQ1MzJkZCIsIm5iZiI6MTcyOTY4MDAyMC40NDQ0MjUsInN1YiI6IjY3MThhNTA0ZTgzM2Q5MmVmMDVmYWI3MiIsInNjb3BlcyI6WyJhcGlfcmVhZCJdLCJ2ZXJzaW9uIjoxfQ.xPdynryswhH8dwHdlqTZiPpZiTjCMMH9IS_Wr0q00YM',
+    Authorization: `Bearer ${TMDB_API_TOKEN}`,
   },
 });
 
 export const getUpcomingMovies = async () => {
   try {
-    const response = await axios.get(
-      'http://www.omdbapi.com/?apikey=1f59831c&s=avengers'
-    );
+    const response = await tmdb.get('/movie/upcoming');
 
     const { data, status } = response;
 
@@ -25,43 +23,41 @@ export const getUpcomingMovies = async () => {
   }
 };
 
-const options = {
-  method: 'GET',
-  url: 'https://api.themoviedb.org/3/movie/upcoming',
-  params: { language: 'en-US', page: '1' },
-  headers: {
-    accept: 'application/json',
-    Authorization:
-      'Bearer eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWI4YjczNmQ3NjdkNWE2MzExZTM4Yzk1ZmQ1MzJkZCIsIm5iZiI6MTcyOTY4NDE0Ni4wNjQ5NSwic3ViIjoiNjcxOGE1MDRlODMzZDkyZWYwNWZhYjcyIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.EpxN1h42rN44W8S3t-0IgXnJPriI8f_mY0u5DaS7uko',
-  },
+export const getNowPlayingMovies = async () => {
+  try {
+    const response = await tmdb.get('/movie/now_playing');
+
+    const { data, status } = response;
+
+    return { success: true, data, status };
+  } catch (error) {
+    console.log(error);
+    return { success: false, data: error };
+  }
 };
 
-// export const getUpcomingMovies = async () => {
-//   axios
-//     .request(options)
-//     .then((res) => console.log(res.data))
-//     .catch((err) => console.error(err));
-// };
+export const getPopularMovies = async () => {
+  try {
+    const response = await axios.get('/movie/popular');
 
-const config = {
-  baseURL: 'https://api.themoviedb.org/3/movie',
-  token:
-    'eyJhbGciOiJIUzI1NiJ9.eyJhdWQiOiIwYWI4YjczNmQ3NjdkNWE2MzExZTM4Yzk1ZmQ1MzJkZCIsIm5iZiI6MTcyOTY4NDE0Ni4wNjQ5NSwic3ViIjoiNjcxOGE1MDRlODMzZDkyZWYwNWZhYjcyIiwic2NvcGVzIjpbImFwaV9yZWFkIl0sInZlcnNpb24iOjF9.EpxN1h42rN44W8S3t-0IgXnJPriI8f_mY0u5DaS7uko',
+    const { data, status } = response;
+
+    return { success: true, data, status };
+  } catch (error) {
+    console.log(error);
+    return { success: false, data: error };
+  }
 };
 
-// export const getUpcomingMovies = async () => {
-//   try {
-//     const response = await axios.get(`${config.baseURL}/upcoming`, {
-//       headers: {
-//         Authorization: `Bearer ${config.token}`,
-//       },
-//     });
+export const getTopRatedMovies = async () => {
+  try {
+    const response = await axios.get('/movie/top_rated');
 
-//     const { data, status } = response;
+    const { data, status } = response;
 
-//     return { success: true, data, status };
-//   } catch (error) {
-//     console.log(error);
-//     return { success: false, data: error };
-//   }
-// };
+    return { success: true, data, status };
+  } catch (error) {
+    console.log(error);
+    return { success: false, data: error };
+  }
+};

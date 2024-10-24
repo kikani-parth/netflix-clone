@@ -24,17 +24,12 @@ const HomeBanner = () => {
 
   useEffect(() => {
     const handleUpcomingMoviesApi = async () => {
-      console.log('req started');
-
       const { data, status } = await getUpcomingMovies();
-      console.log('req completed');
 
       if (status === 200) {
-        console.log('success');
-        setUpcomingMovies(data.Search); // for omdb
-        //        setUpcomingMovies(data.results);      // for tmdb
+        // setUpcomingMovies(data.Search); // for omdb
+        setUpcomingMovies(data.results); // for tmdb
       } else {
-        console.log('fail');
         Alert.alert(`Req failed with ${data}`);
       }
     };
@@ -43,13 +38,13 @@ const HomeBanner = () => {
   }, []);
 
   const renderMovieBanner = ({ item }) => {
-    //source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}} // for tmdb
+    //source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}}
 
     return (
       <ImageBackground
         style={styles.movieBanner}
         resizeMode="cover"
-        source={{ uri: item.Poster }}
+        source={{ uri: `https://image.tmdb.org/t/p/w500/${item.poster_path}` }}
       >
         <LinearGradient
           style={styles.linearContainer}
@@ -78,7 +73,7 @@ const HomeBanner = () => {
         pagingEnabled
         showsHorizontalScrollIndicator={false}
         horizontal
-        keyExtractor={(item) => item.imdbID}
+        keyExtractor={(item) => item.id}
         data={upcomingMovies}
         renderItem={renderMovieBanner}
       />
@@ -90,7 +85,7 @@ export default HomeBanner;
 
 const styles = StyleSheet.create({
   container: {
-    height: responsiveHeight(70),
+    height: responsiveHeight(60),
     width: '100%',
   },
   movieBanner: {
