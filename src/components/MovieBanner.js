@@ -13,7 +13,7 @@ import {
 import { LinearGradient } from 'expo-linear-gradient';
 import { Entypo } from '@expo/vector-icons';
 
-const MovieBanner = memo(({ movie }) => {
+const MovieBanner = memo(({ movie, onPress }) => {
   //source={{uri:`https://image.tmdb.org/t/p/w500/${item.poster_path}`}}
 
   return (
@@ -32,7 +32,11 @@ const MovieBanner = memo(({ movie }) => {
           <Text style={styles.titles}>My List</Text>
         </TouchableOpacity>
 
-        <TouchableOpacity activeOpacity={0.8} style={styles.playButton}>
+        <TouchableOpacity
+          onPress={onPress}
+          activeOpacity={0.8}
+          style={styles.playButton}
+        >
           <Entypo name="controller-play" size={24} color="black" />
           <Text style={styles.playButtonText}>Play</Text>
         </TouchableOpacity>

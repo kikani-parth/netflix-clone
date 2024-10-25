@@ -6,12 +6,19 @@ import { responsiveHeight } from 'react-native-responsive-dimensions';
 import MovieBanner from './MovieBanner';
 import useMoviesApi from '../hooks/useMoviesApi';
 import { getUpcomingMovies } from '../api/Network';
+import { useNavigation } from '@react-navigation/native';
 
 const HomeBanner = () => {
   const [upcomingMovies] = useMoviesApi(getUpcomingMovies);
 
+  const navigation = useNavigation();
+
+  const handleOnPress = (movieData) => {
+    navigation.navigate('MovieDetailsScreen', { movieData, shouldPlay: true });
+  };
+
   const renderMovieBanner = useCallback(({ item }) => {
-    return <MovieBanner movie={item} />;
+    return <MovieBanner movie={item} onPress={() => handleOnPress(item)} />;
   }, []);
 
   return (

@@ -18,8 +18,8 @@ import MovieCards from '../../components/MovieCards';
 // import * as ScreenOrientation from 'expo-screen-orientation';
 
 const MovieDetailsScreen = ({ route }) => {
-  const movieData = route.params.movieData;
-  const [isVideoVisible, setIsVideoVisible] = useState(false);
+  const { movieData, shouldPlay } = route.params;
+  const [isVideoVisible, setIsVideoVisible] = useState(shouldPlay);
 
   const [similarMovies] = useMoviesApi(getSimilarMovies, [movieData.id]);
 
