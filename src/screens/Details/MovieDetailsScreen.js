@@ -8,15 +8,20 @@ import {
   Text,
 } from 'react-native';
 import React, { useState } from 'react';
+import useMoviesApi from '../../hooks/useMoviesApi';
+import { getSimilarMovies } from '../../api/Network';
 import MovieInfo from '../../components/MovieInfo';
 import MoviePlayer from '../../components/MoviePlayer';
 import LongButtons from '../../components/LongButtons';
+import MovieCards from '../../components/MovieCards';
+
 // import * as ScreenOrientation from 'expo-screen-orientation';
 
 const MovieDetailsScreen = ({ route }) => {
   const movieData = route.params.movieData;
-
   const [isVideoVisible, setIsVideoVisible] = useState(false);
+
+  const [similarMovies] = useMoviesApi(getSimilarMovies, [movieData.id]);
 
   return (
     <SafeAreaView style={styles.container}>
@@ -26,6 +31,7 @@ const MovieDetailsScreen = ({ route }) => {
         <MovieInfo movieData={movieData} />
         <LongButtons onPlayButtonPress={() => setIsVideoVisible(true)} />
         <Text style={styles.overview}>{movieData.overview}</Text>
+        <MovieCards title="Similar" data={similarMovies} />
       </ScrollView>
     </SafeAreaView>
   );
@@ -46,7 +52,7 @@ const styles = StyleSheet.create({
     color: 'white',
     fontSize: 15,
     marginVertical: 10,
-    textAlign: 'justify',
+    // textAlign: 'justify',
     paddingHorizontal: 10,
   },
 });

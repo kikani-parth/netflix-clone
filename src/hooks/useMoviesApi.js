@@ -1,14 +1,14 @@
 import { useState, useEffect } from 'react';
 import { Alert } from 'react-native';
 
-const useMoviesApi = (apiCallback) => {
+const useMoviesApi = (apiCallback, args = []) => {
   const [movies, setMovies] = useState([]);
 
   const handleMoviesApi = async () => {
-    const { data, status } = await apiCallback();
+    const { data, status } = await apiCallback(...args);
+    console.log('req completed');
 
     if (status === 200) {
-      // setUpcomingMovies(data.Search); // for omdb
       setMovies(data.results); // for tmdb
     } else {
       Alert.alert(`Req failed with ${data}`);
@@ -17,7 +17,7 @@ const useMoviesApi = (apiCallback) => {
 
   useEffect(() => {
     handleMoviesApi();
-  }, []);
+  }, [apiCallback, ...args]);
 
   return [movies];
 };

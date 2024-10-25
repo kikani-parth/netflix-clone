@@ -74,3 +74,16 @@ export const getTranslations = async (movieId) => {
     return { success: false, data: error };
   }
 };
+
+export const getSimilarMovies = async (movieId) => {
+  try {
+    const response = await tmdb.get(`/movie/${movieId}/similar`);
+
+    const { data, status } = response;
+
+    return { success: true, data, status };
+  } catch (error) {
+    console.log(error);
+    return { success: false, data: error };
+  }
+};
