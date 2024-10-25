@@ -13,7 +13,7 @@ import netflixLogo from '../../assets/netflix_logo.png';
 const Splash = ({ navigation }) => {
   useEffect(() => {
     setTimeout(() => {
-      navigation.replace('Home');
+      navigation.replace('HomeScreen');
     }, 2000);
   }, []);
   return (

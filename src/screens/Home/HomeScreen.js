@@ -1,3 +1,5 @@
+// HomeScreen.js
+
 import { ScrollView, StatusBar, StyleSheet, Text, View } from 'react-native';
 import React from 'react';
 import HomeBanner from '../../components/HomeBanner';
@@ -9,7 +11,7 @@ import {
   getTopRatedMovies,
 } from '../../api/Network';
 
-const Home = () => {
+const HomeScreen = () => {
   const [nowPlayingMovies] = useMoviesApi(getNowPlayingMovies);
   const [popularMovies] = useMoviesApi(getPopularMovies);
   const [topRatedMovies] = useMoviesApi(getTopRatedMovies);
@@ -29,7 +31,7 @@ const Home = () => {
   );
 };
 
-export default Home;
+export default HomeScreen;
 
 const styles = StyleSheet.create({
   container: {
