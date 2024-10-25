@@ -61,3 +61,16 @@ export const getTopRatedMovies = async () => {
     return { success: false, data: error };
   }
 };
+
+export const getTranslations = async (movieId) => {
+  try {
+    const response = await tmdb.get(`/movie/${movieId}/translations`);
+
+    const { data, status } = response;
+
+    return { success: true, data, status };
+  } catch (error) {
+    console.log(error);
+    return { success: false, data: error };
+  }
+};
