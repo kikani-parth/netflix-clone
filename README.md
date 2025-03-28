@@ -1,5 +1,5 @@
 # Netflix Clone
-A mobile application built with React Native that replicates the look and feel of Netflix. This project is a demonstration of modern mobile development techniques, featuring smooth animations, dynamic content, and an intuitive UI inspired by the Netflix experience.
+A mobile application built with React Native that replicates the look and feel of Netflix. The project replicates essential features of Netflix such as integrated video playback functionality for seamless media streaming and dynamic profile management with features to add, edit, and display profiles
 
 _**Note: This is only a partial Netflix clone and as a result many features/optimizations are missing and need to be implemented in the future.**_
 
